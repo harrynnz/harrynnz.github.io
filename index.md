@@ -1,7 +1,7 @@
 # My case stuff
 
 ## Demo
- - I'll add demo here
+ - [Firt Day Demo](01-first-demo)
 
 ## Assignments
- - Assignment will be put here
+ - [Assignment will be put here]
