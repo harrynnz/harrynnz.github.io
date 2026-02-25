@@ -4,7 +4,7 @@ let speed = 5;
 let size = 20;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(910, 710);
   x = width/2;
   y = height/2;
   noStroke();
@@ -13,7 +13,7 @@ function setup() {
 function draw() {
   background(255);
   moveRect();
-  fill("black");
+  fill("black")
   rect(x, y, size, size);
   
 }
@@ -38,6 +38,12 @@ function moveRect() {
     restriction();
   }
 }
+
+function keyPressed() {
+  if (key === 32) {
+    
+  }
+}
 ////////////////////////////////////////////////////////////
 function restriction() {
   if (x + size === width) {
@@ -45,5 +51,11 @@ function restriction() {
   }
   if (y + size  === height) {
     y -= speed;
+  }
+  if (x === 0) {
+    x += speed;
+  }
+  if (y === 0) {
+    y += speed;
   }
 }
