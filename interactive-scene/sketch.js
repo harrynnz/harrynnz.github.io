@@ -13,7 +13,7 @@ function setup() {
 function draw() {
   background(255);
   moveRect();
-  fill("black")
+  fill("black");
   rect(x, y, size, size);
   
 }
