@@ -1,12 +1,13 @@
-let x = 0;
-let y = 0;
-let speed = 5;
-let size = 20;
+let xStartLocation = 0;
+let yStartLocation= 0;
+let objectVelocity = 5;
+let dashVelocity = 10;
+let dashDistance = 30;
+let objectSize = 20;
+let cavaSize = 500;
 
 function setup() {
-  createCanvas(910, 710);
-  x = width/2;
-  y = height/2;
+  createCanvas(cavaSize, cavaSize);
   noStroke();
 }
 
@@ -14,48 +15,82 @@ function draw() {
   background(255);
   moveRect();
   fill("black");
-  rect(x, y, size, size);
-  
+  rect(250, 250, objectSize, objectSize);
+}
+
+////////////////////////////////////////////////////////////
+
+while (dashVelocity < dashDistance) {
+  if (objectSize + objectVelocity >= x ) {
+    break;
+  }
+  moveRect();
 }
 
 
-////////////////////////////////////////////////////////////
+
 function moveRect() {
   if (keyIsDown(87)) { // w
     y -= speed;
     restriction();
+    if (keyIsDown(32)) { // SPACE
+      y -= dashVelocity;
+      restriction();
+    }
   }
+  
+  
+  
   if (keyIsDown(83)) { // s
     y += speed;
     restriction();
+    if (keyIsDown(32)) { // SPACE
+      y += dashVelocity;
+      restriction();
+    }
   }
+  
+  
+  
   if (keyIsDown(68)) { // d
     x += speed;
     restriction();
+    if (keyIsDown(32)) { // SPACE
+      x += dashVelocity;
+      restriction();
+    }
   }
-  if (keyIsDown(65)) { // a
+  
+  
+  
+  if (keyIsDown(65)) {
+    // a
     x -= speed;
     restriction();
+    if (keyIsDown(32)) { // SPACE
+      x -= dashVelocity;
+      restriction();
+    }
   }
+  
+  
 }
 
-function keyPressed() {
-  if (key === 32) {
-    
-  }
+////////////////////////////////////////////////////////////  function restriction() {
+if (x + size === width) {
+  x -= speed;
+  console.log("You hit the wall");
 }
-////////////////////////////////////////////////////////////
-function restriction() {
-  if (x + size === width) {
-    x -= speed;
-  }
-  if (y + size  === height) {
-    y -= speed;
-  }
-  if (x === 0) {
-    x += speed;
-  }
-  if (y === 0) {
-    y += speed;
-  }
+if (y + size === height) {
+  y -= speed;
+  console.log("You hit the wall"); 
 }
+if (x === 0) {
+  x += speed;
+  console.log("You hit the wall");
+}
+if (y === 0) {
+  y += speed;
+  console.log("You hit the wall");
+}
+

@@ -14,5 +14,5 @@ function setup() {
 
 function draw() {
   background(220);
-  image(marioImg, mouseX, mouseY);
+  image(marioImg, mouseX - 100, mouseY);
 }
