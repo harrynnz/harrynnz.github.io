@@ -1,96 +1,51 @@
-let xStartLocation = 0;
-let yStartLocation= 0;
-let objectVelocity = 5;
-let dashVelocity = 10;
-let dashDistance = 30;
-let objectSize = 20;
-let cavaSize = 500;
+let x, y;
+let speed = 5;
+let trail = [];
 
 function setup() {
-  createCanvas(cavaSize, cavaSize);
-  noStroke();
+  createCanvas(windowWidth, windowHeight);
+  x = width / 2;
+  y = height / 2;
 }
 
 function draw() {
-  background(255);
-  moveRect();
-  fill("black");
-  rect(250, 250, objectSize, objectSize);
-}
+  background(0); // clear background
 
-////////////////////////////////////////////////////////////
-
-while (dashVelocity < dashDistance) {
-  if (objectSize + objectVelocity >= x ) {
-    break;
-  }
-  moveRect();
-}
-
-
-
-function moveRect() {
-  if (keyIsDown(87)) { // w
+  // Move rectangle based on WASD keys
+  if (keyIsDown(87)) {
     y -= speed;
-    restriction();
-    if (keyIsDown(32)) { // SPACE
-      y -= dashVelocity;
-      restriction();
-    }
-  }
-  
-  
-  
-  if (keyIsDown(83)) { // s
+  } // W
+  if (keyIsDown(83)) {
     y += speed;
-    restriction();
-    if (keyIsDown(32)) { // SPACE
-      y += dashVelocity;
-      restriction();
-    }
-  }
-  
-  
-  
-  if (keyIsDown(68)) { // d
-    x += speed;
-    restriction();
-    if (keyIsDown(32)) { // SPACE
-      x += dashVelocity;
-      restriction();
-    }
-  }
-  
-  
-  
+  } // S
   if (keyIsDown(65)) {
-    // a
     x -= speed;
-    restriction();
-    if (keyIsDown(32)) { // SPACE
-      x -= dashVelocity;
-      restriction();
-    }
+  } // A
+  if (keyIsDown(68)) {
+    x += speed;
+  } // D
+
+  // Keep rectangle inside canvas
+  x = constrain(x, 0, width - 50);
+  y = constrain(y, 0, height - 50);
+
+  // Save position to trail
+  trail.push({ x: x, y: y });
+
+  // Limit trail length
+  if (trail.length > 25) {
+    trail.shift();
   }
-  
-  
-}
 
-////////////////////////////////////////////////////////////  function restriction() {
-if (x + size === width) {
-  x -= speed;
-  console.log("You hit the wall");
-}
-if (y + size === height) {
-  y -= speed;
-  console.log("You hit the wall"); 
-}
-if (x === 0) {
-  x += speed;
-  console.log("You hit the wall");
-}
-if (y === 0) {
-  y += speed;
-  console.log("You hit the wall");
-}
+  // Draw trail
+  for (let i = 0; i < trail.length; i++) {
+    let alpha = map(i, 0, trail.length, 50, 255);
+    fill(0, 255, 0, alpha);
+    noStroke();
+    rect(trail[i].x, trail[i].y, 50, 50);
+  }
 
+  // Draw main rectangle
+  fill(0, 255, 0);
+  rect(x, y, 50, 50);
+}
