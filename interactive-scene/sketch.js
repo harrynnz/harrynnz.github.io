@@ -33,7 +33,7 @@ function draw() {
   trail.push({ x: x, y: y });
 
   // Limit trail length
-  if (trail.length > 25) {
+  if (trail.length > 10) {
     trail.shift();
   }
 
@@ -42,10 +42,10 @@ function draw() {
     let alpha = map(i, 0, trail.length, 50, 255);
     fill(0, 255, 0, alpha);
     noStroke();
-    rect(trail[i].x, trail[i].y, 50, 50);
+    circle(trail[i].x, trail[i].y, 50, 50);
   }
 
   // Draw main rectangle
   fill(0, 255, 0);
-  rect(x, y, 50, 50);
+  circle(x, y, 50, 50);
 }

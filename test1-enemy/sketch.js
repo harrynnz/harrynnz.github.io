@@ -1,1 +1,0 @@
-https://www.kirupa.com/canvas/creating_motion_trails.htm
