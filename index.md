@@ -7,8 +7,6 @@
  - [Ball Array](04-ball-array)
 
 
- ## Test
- - [Test 1](test1-enemy)
 
 ## Assignments
  - [Interactive Scene](interactive-scene)
