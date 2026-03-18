@@ -13,25 +13,18 @@ function draw() {
     background(255);
     stroke(0);
     
-    y = 400;
-    w = 100;
-    h = 75;
   }
   else {
     background(0);
     stroke(255);
-    x = 390;
-    y = 390;
-    w = 120;
-    h = 95;
+    
   }
   fill(175);
   rect(x, y, w, h);
 }
 
-function mousePressed() {
-  if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
-    button = !button;
-  }
+if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
+  button = !button;
 }
+
 

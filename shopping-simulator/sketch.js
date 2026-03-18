@@ -2,6 +2,7 @@ let shoppingCart;
 let posX = 300;
 let posY = 732;
 let speed = 5;
+let gameOver = false;
 
 function preload() {
   shoppingCart = loadImage("shoppingCart.png");
@@ -27,4 +28,7 @@ function draw() {
 
   // Position of the cart
   image(shoppingCart, posX, posY, shoppingCart.width * 0.5, shoppingCart.height * 0.5);
+  
 }
+
+
