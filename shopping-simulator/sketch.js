@@ -23,7 +23,8 @@ function draw() {
   if (!gameOver) {
     updateGame();
     drawGame();
-  } else {
+  }
+  else {
     showGameOver();
   }
 }
@@ -88,7 +89,7 @@ function showGameOver() {
   text("Click to Restart", width / 2, height / 2 + 40);
 }
 
-// Cookie Object Blueprint (Class)
+
 class Cookie {
   constructor() {
     this.x = random(20, width - 20);
@@ -101,7 +102,7 @@ class Cookie {
   }
 }
 
-// Restart logic
+
 function mousePressed() {
   if (gameOver) {
     cookies = [];
