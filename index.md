@@ -6,6 +6,7 @@
  - [Images](03-images)
  - [Ball Array](04-ball-array)
  - [Perlin Noise](06-perlin)
+ - [2d grid](07-2dgrid)
 
 
 ## Assignments
