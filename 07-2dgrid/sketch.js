@@ -2,9 +2,9 @@
 //learning 2d arrays
 
 let theGrid = [[0, 0, 1, 0],
-               [1, 0, 1, 0],
-               [0, 1, 1, 0],
-               [0, 1, 0, 1]];
+  [1, 0, 1, 0],
+  [0, 1, 1, 0],
+  [0, 1, 0, 1]];
 const SQUARE_DIMENSIONS = theGrid.length;
 
 let cellSize;
@@ -33,7 +33,7 @@ function mousePressed() {
 
 function toggleCell() {
   if (theGrid[y][x] === 1) {
-    theGrid.[y][x] = 0;
+    theGrid[y][x] = 0;
   }
   else if (theGrid[y][x] === 0) {
     theGrid[y][x] = 1;

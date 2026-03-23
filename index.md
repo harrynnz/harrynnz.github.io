@@ -7,6 +7,8 @@
  - [Ball Array](04-ball-array)
  - [Perlin Noise](06-perlin)
  - [2d grid](07-2dgrid)
+ - [Rectangular Grid](08-rect-grid)
+ - [Game of Life](09-game-of-life)
 
 
 ## Assignments
