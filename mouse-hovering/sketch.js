@@ -1,30 +1,30 @@
-let button = false;
-let x = 400;
-let y = 400;
-let w = 100;
-let h = 75;
+
+  let button = false;
+  let x = 50;
+  let y = 50;
+  let w = 100;
+  let h = 75;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-}
+    createCanvas(windowWidth, windowHeight);
+  }
 
 function draw() {
   if (button) {
     background(255);
     stroke(0);
-    
   }
   else {
     background(0);
     stroke(255);
-    
   }
   fill(175);
   rect(x, y, w, h);
 }
 
-if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
-  button = !button;
+function mousePressed() {
+  if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
+    button = !button;
+  }
 }
-
 

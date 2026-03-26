@@ -9,6 +9,7 @@
  - [2d grid](07-2dgrid)
  - [Rectangular Grid](08-rect-grid)
  - [Game of Life](09-game-of-life)
+ - [Character In Grid](10-character)
 
 
 ## Assignments
