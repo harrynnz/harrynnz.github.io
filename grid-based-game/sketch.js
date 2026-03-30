@@ -1,3 +1,4 @@
+//Play button properties
 let playButton = {
   x: 400,
   y: 300,
@@ -5,13 +6,21 @@ let playButton = {
   h: 80
 };
 let button = false;
-let text1 = 'Play';
+
+
+//Create 3x3 array
 let theGrid = [[0, 0, 0],
                [0, 0, 0],
                [0, 0, 0]];
 const SQUARE_DIMENSIONS = theGrid.length;
-
 let cellSize;
+
+//"Tic-Tac-Toe" animation stuffs
+let growing = true;
+let sizeChange = 0.5;
+let maxSize = 100;
+let minSize = 60;
+let currentSize = 80;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -26,34 +35,51 @@ function setup() {
 }
 
 function draw() {
-  background(225);
+  background("purple");
 
   //When play button is clicked, show 3x3 grid
   if (button) {
     showGrid();
+    //Make play button disappear and unclickable when clicked
+    rect(0, 0, 0, 0);
+    playButton.x = 0;
+    playButton.y = 0;
+    playButton.w = 0;
+    playButton.h = 0;
   }
 
   //Create play button
   if (!button) {
-    fill(175);
-    rect(playButton.x, playButton.y, playButton.w, playButton.h);
 
-    //Added text on top of play button
-    textSize(50);
-    fill(255);
-    stroke(0);
-    strokeWeight(4);
-    text(text1, playButton.x + playButton.w/2 -50, playButton.y + playButton.h - 25);
+    //Text animation
+    if (growing) {
+      currentSize += sizeChange;
+      if (currentSize >= maxSize) {
+        growing = !growing;
+      }
+    }
+    else {
+      currentSize -= sizeChange;
+      if (currentSize <= minSize) {
+        growing = !growing;
+      }
+    }
+    textSize(currentSize);
+    text("Tic -Tac -Toe", playButton.x - 100, playButton.y - 100 );
   }
-  //Make play button disappear and unclickable when clicked
-  else {
-    rect(0, 0, 0, 0);
-    playbutton.x = 0;
-    playbutton.y = 0;
-    playbutton.w = 0;
-    playbutton.h = 0;
-  }
+
+  //Play button rect
+  fill(175);
+  rect(playButton.x, playButton.y, playButton.w, playButton.h);
+
+  //Added text on top of play button
+  textSize(50);
+  fill(255);
+  stroke(0);
+  strokeWeight(4);
+  text("Play", playButton.x + playButton.w/2 -50, playButton.y + playButton.h - 25);
 }
+
 
 //Make play button clickable
 function mousePressed() {
@@ -64,7 +90,7 @@ function mousePressed() {
   }
 }
 
-//Make 3x3 grid
+//Display 3x3 grid
 function showGrid() {
   for (let y = 0; y < SQUARE_DIMENSIONS; y++) {
     for (let x = 0; x < SQUARE_DIMENSIONS; x++) {
