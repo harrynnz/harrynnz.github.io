@@ -1,3 +1,6 @@
+let cols;
+let rows;
+
 //Play button properties
 let playButton = {
   x: 400,
@@ -24,8 +27,15 @@ let currentSize = 80;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  rows = Math.floor(height/CELL_SIZE);
+  cols = Math.floor(width/CELL_SIZE);
+
+  
   playButton.y = height/2 - playButton.h/2;
   playButton.x = width/2 - playButton.w/2;
+
+
   if (width < height) {
     cellSize = width / SQUARE_DIMENSIONS;
   }
@@ -85,8 +95,25 @@ function draw() {
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
+
+  toggleCell(x, y);
+
+
+
   if (mouseX > playButton.x && mouseX < playButton.x + playButton.w && mouseY > playButton.y && mouseY < playButton.y + playButton.h) {
     button = !button;
+  }
+}
+
+function toggleCell(x, y) {
+  //make sure the cell actually exists!
+  if (x >= 0 && x < cols && y >= 0 && y < rows) {
+    if (grid[y][x] === 1) {
+      grid[y][x] = 0;
+    }
+    else if (grid[y][x] === 0) {
+      grid[y][x] = 1;
+    }
   }
 }
 
