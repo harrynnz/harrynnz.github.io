@@ -28,9 +28,6 @@ let currentSize = 80;
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  rows = Math.floor(height/CELL_SIZE);
-  cols = Math.floor(width/CELL_SIZE);
-
   
   playButton.y = height/2 - playButton.h/2;
   playButton.x = width/2 - playButton.w/2;
@@ -42,6 +39,9 @@ function setup() {
   else {
     cellSize = height / SQUARE_DIMENSIONS;
   }
+
+  rows = Math.floor(height/CELL_SIZE);
+  cols = Math.floor(width/CELL_SIZE);
 }
 
 function draw() {
@@ -96,7 +96,8 @@ function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
 
-  toggleCell(x, y);
+  switchPlayer();
+  dispplayxno(x, y);
 
 
 
@@ -105,14 +106,13 @@ function mousePressed() {
   }
 }
 
-function toggleCell(x, y) {
-  //make sure the cell actually exists!
+function dispplayxno(x, y) {
   if (x >= 0 && x < cols && y >= 0 && y < rows) {
-    if (grid[y][x] === 1) {
-      grid[y][x] = 0;
-    }
-    else if (grid[y][x] === 0) {
+    if (currentPlayer === "x") {
       grid[y][x] = 1;
+    }
+    else if (currentPlayer === "o") {
+      grid[y][x] = 2;
     }
   }
 }
@@ -123,8 +123,30 @@ function showGrid() {
     for (let x = 0; x < SQUARE_DIMENSIONS; x++) {
       if (theGrid[y][x] === 0) {
         fill("white");
+        square(x * cellSize, y * cellSize, cellSize);
       }
-      square(x * cellSize, y * cellSize, cellSize);
+      if (theGrid[y][x] === 1) {
+        strokeWeight(25);
+        stroke("black");
+        line(x * cellSize, y * cellSize, x * cellSize + cellSize, y * cellSize + cellSize);
+        line(x * cellSize + cellSize, y * cellSize + cellSize, x * cellSize, y * cellSize);
+      }
+      if (theGrid[y][x] === 2) {
+        circle(x * cellSize / 2, y * cellSize / 2, cellSize / 2 - 10);
+      }
     }
   }
+}
+
+
+//Switch player
+function switchPlayer() {
+  let currentPlayer = "x";
+  if (currentPlayer === "x") {
+    currentPlayer = o;
+  }
+  else {
+    currentPlayer = "x";
+  }
+  return  currentPlayer;
 }
