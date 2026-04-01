@@ -1,6 +1,9 @@
 let cols;
 let rows;
 
+let currentPlayer = "x";
+
+
 //Play button properties
 let playButton = {
   x: 400,
@@ -40,8 +43,8 @@ function setup() {
     cellSize = height / SQUARE_DIMENSIONS;
   }
 
-  rows = Math.floor(height/CELL_SIZE);
-  cols = Math.floor(width/CELL_SIZE);
+  rows = Math.floor(height/cellSize);
+  cols = Math.floor(width/cellSize);
 }
 
 function draw() {
@@ -95,10 +98,9 @@ function draw() {
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
-
-  switchPlayer();
-  dispplayxno(x, y);
-
+  if (button) {
+    dispplayxno(x, y);
+  }
 
 
   if (mouseX > playButton.x && mouseX < playButton.x + playButton.w && mouseY > playButton.y && mouseY < playButton.y + playButton.h) {
@@ -108,11 +110,13 @@ function mousePressed() {
 
 function dispplayxno(x, y) {
   if (x >= 0 && x < cols && y >= 0 && y < rows) {
-    if (currentPlayer === "x") {
-      grid[y][x] = 1;
+    if (currentPlayer === "x" && theGrid[y][x] === 0) {
+      theGrid[y][x] = 1;
+      switchPlayer();
     }
-    else if (currentPlayer === "o") {
-      grid[y][x] = 2;
+    else if (currentPlayer === "o" && theGrid[y][x] === 0) {
+      theGrid[y][x] = 2;
+      switchPlayer();
     }
   }
 }
@@ -122,17 +126,20 @@ function showGrid() {
   for (let y = 0; y < SQUARE_DIMENSIONS; y++) {
     for (let x = 0; x < SQUARE_DIMENSIONS; x++) {
       if (theGrid[y][x] === 0) {
+        strokeWeight(5);
         fill("white");
         square(x * cellSize, y * cellSize, cellSize);
       }
       if (theGrid[y][x] === 1) {
-        strokeWeight(25);
+        strokeWeight(60);
         stroke("black");
-        line(x * cellSize, y * cellSize, x * cellSize + cellSize, y * cellSize + cellSize);
-        line(x * cellSize + cellSize, y * cellSize + cellSize, x * cellSize, y * cellSize);
+        line(x * cellSize + 50, y * cellSize + 50, x * cellSize + cellSize - 50, y * cellSize + cellSize - 50);
+        line(x * cellSize + cellSize - 50, y * cellSize + 50, x * cellSize + 50, y * cellSize + cellSize - 50);
       }
       if (theGrid[y][x] === 2) {
-        circle(x * cellSize / 2, y * cellSize / 2, cellSize / 2 - 10);
+        strokeWeight(50);
+        fill("purple");
+        circle(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize / 2 - 10);
       }
     }
   }
@@ -141,12 +148,30 @@ function showGrid() {
 
 //Switch player
 function switchPlayer() {
-  let currentPlayer = "x";
   if (currentPlayer === "x") {
-    currentPlayer = o;
+    currentPlayer = "o";
   }
   else {
     currentPlayer = "x";
   }
   return  currentPlayer;
+}
+
+
+function checkWinner() {
+  for (let i = 0; i <= theGrid.length; i++)
+    for (let k =0; k <= theGrid.length; k++) {
+      if  //3 in a horizontal line
+         (theGrid[y][x - 1] === 1 &&
+          theGrid[y][x + 1] === 1 &&
+
+          //3 in vertical line
+          theGrid[y - 1][x] === 1 &&
+          theGrid[y + 1][x] === 1 &&
+
+          //3 diagonally
+          theGrid[y - 1][x - 1] === 1 &&
+          theGrid[y + 1][x + 1] === 1 &&) 
+
+          {}
 }
