@@ -50,9 +50,12 @@ function setup() {
 function draw() {
   background("purple");
 
+  //
   //When play button is clicked, show 3x3 grid
   if (button) {
     showGrid();
+
+    //
     //Make play button disappear and unclickable when clicked
     rect(0, 0, 0, 0);
     playButton.x = 0;
@@ -61,9 +64,11 @@ function draw() {
     playButton.h = 0;
   }
 
+  //
   //Create play button
   if (!button) {
-
+    
+    //
     //Text animation
     if (growing) {
       currentSize += sizeChange;
@@ -121,6 +126,8 @@ function dispplayxno(x, y) {
   }
 }
 
+
+
 //Display 3x3 grid
 function showGrid() {
   for (let y = 0; y < SQUARE_DIMENSIONS; y++) {
@@ -130,19 +137,26 @@ function showGrid() {
         fill("white");
         square(x * cellSize, y * cellSize, cellSize);
       }
-      if (theGrid[y][x] === 1) {
+      if (theGrid[y][x] === 1) { // display X
+        strokeWeight(5);
+        fill("purple");
+        square(x * cellSize, y * cellSize, cellSize);
         strokeWeight(60);
         stroke("black");
         line(x * cellSize + 50, y * cellSize + 50, x * cellSize + cellSize - 50, y * cellSize + cellSize - 50);
         line(x * cellSize + cellSize - 50, y * cellSize + 50, x * cellSize + 50, y * cellSize + cellSize - 50);
       }
-      if (theGrid[y][x] === 2) {
+      if (theGrid[y][x] === 2) { // display O
+        strokeWeight(5);
+        fill("purple");
+        square(x * cellSize, y * cellSize, cellSize);
         strokeWeight(50);
         fill("purple");
         circle(x * cellSize + cellSize / 2, y * cellSize + cellSize / 2, cellSize / 2 - 10);
       }
     }
   }
+  checkWinner();
 }
 
 
@@ -158,20 +172,23 @@ function switchPlayer() {
 }
 
 
+
 function checkWinner() {
-  for (let i = 0; i <= theGrid.length; i++)
-    for (let k =0; k <= theGrid.length; k++) {
-      if  //3 in a horizontal line
-         (theGrid[y][x - 1] === 1 &&
-          theGrid[y][x + 1] === 1 &&
+  if  //3 in a horizontal line
+      (theGrid[0][0] === 1 &&
+       theGrid[0][1] === 1 &&
+       theGrid[0][2] === 1 &&
 
-          //3 in vertical line
-          theGrid[y - 1][x] === 1 &&
-          theGrid[y + 1][x] === 1 &&
+       //3 in vertical line
+       theGrid[0][0] === 1 &&
+       theGrid[1][0] === 1 &&
+       theGrid[2][0] === 1 &&
 
-          //3 diagonally
-          theGrid[y - 1][x - 1] === 1 &&
-          theGrid[y + 1][x + 1] === 1 &&) 
-
-          {}
+       //3 diagonally
+       theGrid[0][0] === 1 &&
+       theGrid[1][1] === 1 &&
+       theGrid[2][2] === 1)
+  {
+    text('x win', 50, 50);
+  }
 }
