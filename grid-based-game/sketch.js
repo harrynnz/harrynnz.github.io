@@ -175,20 +175,51 @@ function switchPlayer() {
 
 function checkWinner() {
   if  //3 in a horizontal line
-      (theGrid[0][0] === 1 &&
-       theGrid[0][1] === 1 &&
-       theGrid[0][2] === 1 &&
+  ((theGrid[0][0] === 1 &&
+    theGrid[0][1] === 1 &&
+    theGrid[0][2] === 1) ||
 
-       //3 in vertical line
-       theGrid[0][0] === 1 &&
-       theGrid[1][0] === 1 &&
-       theGrid[2][0] === 1 &&
+    //3 in vertical line
+    (theGrid[0][0] === 1 &&
+    theGrid[1][0] === 1 &&
+    theGrid[2][0] === 1) ||
 
-       //3 diagonally
-       theGrid[0][0] === 1 &&
-       theGrid[1][1] === 1 &&
-       theGrid[2][2] === 1)
-  {
-    text('x win', 50, 50);
+    //3 diagonally
+    (theGrid[0][0] === 1 &&
+    theGrid[1][1] === 1 &&
+    theGrid[2][2] === 1) ||
+    
+    (theGrid[0][2] === 1 &&
+    theGrid[1][1] === 1 &&
+    theGrid[2][0] === 1)) {
+
+    showWinner();
   }
+
+  if  //3 in a horizontal line
+  ((theGrid[0][0] === 2 &&
+    theGrid[0][1] === 2 &&
+    theGrid[0][2] === 2) ||
+
+    //3 in vertical line
+    (theGrid[0][0] === 2 &&
+    theGrid[1][0] === 2 &&
+    theGrid[2][0] === 2) ||
+
+    //3 diagonally
+    (theGrid[0][0] === 2 &&
+    theGrid[1][1] === 2 &&
+    theGrid[2][2] === 2) ||
+    
+    (theGrid[0][2] === 2 &&
+    theGrid[1][1] === 2 &&
+    theGrid[2][0] === 2)) {
+
+    showWinner();
+  }
+}
+
+
+function showWinner() {
+  text("Player " + currentPlayer + " lose", 50, 50);
 }
