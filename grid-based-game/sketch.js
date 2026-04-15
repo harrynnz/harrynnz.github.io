@@ -3,9 +3,10 @@ let rows;
 
 let currentPlayer = "x";
 
+let totalMove = 0;
 
 //Play button properties
-let playButton = {
+let theButton = {
   x: 400,
   y: 300,
   w: 300,
@@ -32,8 +33,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   
-  playButton.y = height/2 - playButton.h/2;
-  playButton.x = width/2 - playButton.w/2;
+  theButton.y = height/2 - theButton.h/2;
+  theButton.x = width/2 - theButton.w/2;
 
 
   if (width < height) {
@@ -58,10 +59,10 @@ function draw() {
     //
     //Make play button disappear and unclickable when clicked
     rect(0, 0, 0, 0);
-    playButton.x = 0;
-    playButton.y = 0;
-    playButton.w = 0;
-    playButton.h = 0;
+    theButton.x = 0;
+    theButton.y = 0;
+    theButton.w = 0;
+    theButton.h = 0;
   }
 
   //
@@ -83,19 +84,19 @@ function draw() {
       }
     }
     textSize(currentSize);
-    text("Tic -Tac -Toe", playButton.x - 100, playButton.y - 100 );
+    text("Tic -Tac -Toe", theButton.x - 100, theButton.y - 100 );
   }
 
   //Play button rect
   fill(175);
-  rect(playButton.x, playButton.y, playButton.w, playButton.h);
+  rect(theButton.x, theButton.y, theButton.w, theButton.h);
 
   //Added text on top of play button
   textSize(50);
   fill(255);
   stroke(0);
   strokeWeight(4);
-  text("Play", playButton.x + playButton.w/2 -50, playButton.y + playButton.h - 25);
+  text("Play", theButton.x + theButton.w/2 -50, theButton.y + theButton.h - 25);
 }
 
 
@@ -103,12 +104,13 @@ function draw() {
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
+
   if (button) {
     dispplayxno(x, y);
   }
 
 
-  if (mouseX > playButton.x && mouseX < playButton.x + playButton.w && mouseY > playButton.y && mouseY < playButton.y + playButton.h) {
+  if (mouseX > theButton.x && mouseX < theButton.x + theButton.w && mouseY > theButton.y && mouseY < theButton.y + theButton.h) {
     button = !button;
   }
 }
@@ -118,10 +120,12 @@ function dispplayxno(x, y) {
     if (currentPlayer === "x" && theGrid[y][x] === 0) {
       theGrid[y][x] = 1;
       switchPlayer();
+      totalMove += 1;
     }
     else if (currentPlayer === "o" && theGrid[y][x] === 0) {
       theGrid[y][x] = 2;
       switchPlayer();
+      totalMove += 1;
     }
   }
 }
@@ -179,10 +183,26 @@ function checkWinner() {
     theGrid[0][1] === 1 &&
     theGrid[0][2] === 1) ||
 
+    (theGrid[1][0] === 1 &&
+    theGrid[1][1] === 1 &&
+    theGrid[1][2] === 1) ||
+
+    (theGrid[2][0] === 1 &&
+    theGrid[2][1] === 1 &&
+    theGrid[2][2] === 1) ||
+
     //3 in vertical line
     (theGrid[0][0] === 1 &&
     theGrid[1][0] === 1 &&
     theGrid[2][0] === 1) ||
+
+    (theGrid[0][1] === 1 &&
+    theGrid[1][1] === 1 &&
+    theGrid[2][1] === 1) ||
+
+    (theGrid[0][2] === 1 &&
+    theGrid[1][2] === 1 &&
+    theGrid[2][2] === 1) ||
 
     //3 diagonally
     (theGrid[0][0] === 1 &&
@@ -196,15 +216,31 @@ function checkWinner() {
     showWinner();
   }
 
-  if  //3 in a horizontal line
+  else if  //3 in a horizontal line
   ((theGrid[0][0] === 2 &&
     theGrid[0][1] === 2 &&
     theGrid[0][2] === 2) ||
+
+    (theGrid[1][0] === 2 &&
+    theGrid[1][1] === 2 &&
+    theGrid[1][2] === 2) ||
+
+    (theGrid[2][0] === 2 &&
+    theGrid[2][1] === 2 &&
+    theGrid[2][2] === 2) ||
 
     //3 in vertical line
     (theGrid[0][0] === 2 &&
     theGrid[1][0] === 2 &&
     theGrid[2][0] === 2) ||
+
+    (theGrid[0][1] === 2 &&
+    theGrid[1][1] === 2 &&
+    theGrid[2][1] === 2) ||
+
+    (theGrid[0][2] === 2 &&
+    theGrid[1][2] === 2 &&
+    theGrid[2][2] === 2) ||
 
     //3 diagonally
     (theGrid[0][0] === 2 &&
@@ -217,9 +253,13 @@ function checkWinner() {
 
     showWinner();
   }
+  else if (totalMove === 9) {
+    text("It's a tie", 380, 500);
+  }
 }
 
 
 function showWinner() {
-  text("Player " + currentPlayer + " lose", 50, 50);
+  fill("white");
+  text("Player " + currentPlayer + " lose", 380, 450);
 }

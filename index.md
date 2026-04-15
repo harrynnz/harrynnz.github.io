@@ -12,6 +12,7 @@
  - [Character In Grid](10-character)
  -
  - [Walker OOP](12-walker)
+ - [Fireworks OOP](13-fireworks)
 
 
 ## Assignments

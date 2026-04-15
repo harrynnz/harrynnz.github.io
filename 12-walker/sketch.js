@@ -1,3 +1,5 @@
+import { __Graphics__ } from "../../../../../.vscode/extensions/wmcicompsci.cs30-p5-1.9.3/p5types";
+
 class Walker {
   constructor(x, y) {
     this.x = x;
@@ -25,31 +27,52 @@ class Walker {
     }
     else if (choice < 75) {
       //left
-      this.x -= this.speed
+      this.x -= this.speed;
     }
     else {
       //right
-      this.x += this.speed
+      this.x += this.speed;
     }
   }
 }
 
 
+let theWalkers = {};
 
-let tyler;
-let audrey;
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  tyler = new Walker(width/2, height/2);
-  audrey = new Walker(500, 100);
-  audrey.color = "blue";
 }
 
 function draw() {
-  tyler.move();
-  tyler.display();
-
-  audrey.move();
-  audrey.display();
-  
+  for (let someWalker of theWalkers) {
+    someWalker.move();
+    someWalker.display();
+  }
 }
+
+function mousePressed() {
+  let theGuy = new Walker(mouseX,mouseY);
+  theGuy.color = color(random(255), random(255), random(255));
+  theWalkers.push(theGuy);
+}
+
+//Vesion with only 2 walkers
+
+// let tyler;
+// let audrey;
+
+// function setup() {
+//   createCanvas(windowWidth, windowHeight);
+//   tyler = new Walker(width/2, height/2);
+//   audrey = new Walker(500, 100);
+//   audrey.color = "blue";
+// }
+
+// function draw() {
+//   tyler.move();
+//   tyler.display();
+
+//   audrey.move();
+//   audrey.display();
+  
+// }
