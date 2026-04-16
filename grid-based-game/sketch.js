@@ -254,6 +254,7 @@ function checkWinner() {
     showWinner();
   }
   else if (totalMove === 9) {
+    fill("white");
     text("It's a tie", 380, 500);
   }
 }
