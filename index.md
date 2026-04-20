@@ -10,10 +10,10 @@
  - [Rectangular Grid](08-rect-grid)
  - [Game of Life](09-game-of-life)
  - [Character In Grid](10-character)
- -
  - [Walker OOP](12-walker)
  - [Fireworks OOP](13-fireworks)
  - [Ball collision OOP](14-ball-oop)
+ - [Connected Nodes](15-nodes)
 
 
 ## Assignments
